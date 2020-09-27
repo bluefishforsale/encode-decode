@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# re-compresses a single h.264 file into h.265
+# can use nv decoder/nvenc with -n
+# can compare resulting file to original and clean up with -d
+# -f is required
+#
+# example: nvenc delete after compress show only speed for all files over 10GB
+# find . -type f -name "*.mkv" -size +10G | while read line do ; h.264_to_hevc.sh -n -d f "${file}" 2>&1 | grep speed ; done
+
 while getopts "dnf:" opt; do
   case ${opt} in
     d ) DELETE=TRUE ;;
