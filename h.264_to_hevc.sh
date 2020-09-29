@@ -64,7 +64,7 @@ check_file() {
 pushd "${DIRNAME}"
 echo "Compressing ${FILE} now ..."
 set -x
-ffmpeg -y -vsync 0 ${IN_ENCODER} -i "${FILE}" -c:a copy -crf 26 -preset medium -threads ${CORES} ${OUT_ENCODER} "${OUTFILE}" && \
+ffmpeg -y -vsync 0 ${IN_ENCODER} -i "${FILE}" -c:a copy -crf 26 -preset medium -threads ${CORES} ${OUT_ENCODER} "${OUTFILE}" < /dev/null && \
     [[ -n "${DELETE}"  ]] && \
         ( check_file "${FILE}----${OUTFILE}" && ( echo "removing ${FILE} now" ; rm -v "${FILE}" ))
 set +x
