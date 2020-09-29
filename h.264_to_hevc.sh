@@ -48,7 +48,7 @@ check_disk() {
 }
 
 check_file() {
-    IN="${@%%----*}":while
+    IN="${@%%----*}"
     OUT="${@##*----}"
 
     IN_SIZE=$(du "${IN}" | awk '{print $1}')
@@ -61,7 +61,7 @@ check_file() {
     echo $IN_DUR  $OUT_DUR
 
     [[ -z "${OUT_DUR}" ]] && return 1  # no duration
-    (( ${OUT_SIZE} <= 1000000 )) || return 1   # too small
+    (( ${OUT_SIZE} <= 1000000 )) && return 1   # too small
     [[ "${IN_DUR}" == "${OUT_DUR}" ]] && return 0  # winner winner
 }
 
