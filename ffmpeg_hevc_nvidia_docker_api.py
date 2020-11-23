@@ -77,8 +77,6 @@ def run_convert(infile, outfile, stream_mapi, in_codec_name):
         '-fflags', '+igndts',
         '-hwaccel', 'nvdec', '-c:v', in_codec_name, '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
       ] + maps + [ '-crf', '10', '-c:a', 'copy', '-c:s', 'copy', '-c:v', 'hevc_nvenc', '-y', f'{filedir}/{outfile}' ]
-      #'-hwaccel', 'nvdec', '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
-      #'-hwaccel', 'nvdec', '-c:v', in_codec_name, '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
     )
     for line in container.logs(stream=True, follow=True):
       text = line.decode("utf-8")
