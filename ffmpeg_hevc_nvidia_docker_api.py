@@ -75,8 +75,9 @@ def run_convert(infile, outfile, stream_mapi, in_codec_name):
       entrypoint='/usr/local/bin/ffmpeg',
       command=['-hide_banner', '-analyzeduration', '10M', '-probesize', '10M', '-vsync', '0',
         '-fflags', '+igndts',
-        '-hwaccel', 'nvdec', '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
+        '-hwaccel', 'nvdec', '-c:v', in_codec_name, '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
       ] + maps + [ '-crf', '10', '-c:a', 'copy', '-c:s', 'copy', '-c:v', 'hevc_nvenc', '-y', f'{filedir}/{outfile}' ]
+      #'-hwaccel', 'nvdec', '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
       #'-hwaccel', 'nvdec', '-c:v', in_codec_name, '-i', f'{filedir}/{infile}', '-max_muxing_queue_size', '2048',
     )
     for line in container.logs(stream=True, follow=True):
